@@ -13,6 +13,14 @@ export type TUser = {
   passwordChangedAt?: Date;
   mobileNumber?: string;
   profilePhoto?: string;
+
+
+// verify 
+emailVerified?: boolean;
+emailVerificationToken?: string;
+emailVerificationTokenExpires?: Date;
+
+
   createdAt?: Date;
   updatedAt?: Date;
 };
