@@ -77,10 +77,36 @@ const loginUser = catchAsync(async (req, res) => {
       message: 'Access token retrieved successfully!',
       data: result,
     });
+  }); 
+
+
+// Add this new controller
+const verifyEmail = catchAsync(async (req, res) => {
+  const { token } = req.body;
+  const result = await AuthServices.verifyEmail(token);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: result.message,
+    data: result.user,
   });
+});
+const resendVerificationEmail = catchAsync(async (req, res) => {
+  const { email } = req.body;
+  const result = await AuthServices.resendVerificationEmail(email);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: result.message,
+    data: null,
+  });
+});
+
   export const AuthControllers = {
     registerUser,
     loginUser,
     changePassword,
-    refreshToken,
+    refreshToken,verifyEmail, resendVerificationEmail
   };

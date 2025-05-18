@@ -96,7 +96,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "C:\\CADDCORE-IT-ROJECT-CODE\\CADD-CORE-WEB-CLIENT-CODE\\caddcore-web-Server-code",
+    "outputFileTracingRoot": "D:\\CADD-CORE-OFICAIL-ALL_CODE\\caddcore-web-Server-code",
     "allowedDevOrigins": [],
     "experimental": {
       "allowedDevOrigins": [],
@@ -176,7 +176,7 @@
       "forceSwcTransforms": false,
       "largePageDataBytes": 128000,
       "turbo": {
-        "root": "C:\\CADDCORE-IT-ROJECT-CODE\\CADD-CORE-WEB-CLIENT-CODE\\caddcore-web-Server-code"
+        "root": "D:\\CADD-CORE-OFICAIL-ALL_CODE\\caddcore-web-Server-code"
       },
       "typedRoutes": false,
       "typedEnv": false,
@@ -282,7 +282,7 @@
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.js"
   },
-  "appDir": "C:\\CADDCORE-IT-ROJECT-CODE\\CADD-CORE-WEB-CLIENT-CODE\\caddcore-web-Server-code",
+  "appDir": "D:\\CADD-CORE-OFICAIL-ALL_CODE\\caddcore-web-Server-code",
   "relativeAppDir": "",
   "files": [
     ".next\\routes-manifest.json",

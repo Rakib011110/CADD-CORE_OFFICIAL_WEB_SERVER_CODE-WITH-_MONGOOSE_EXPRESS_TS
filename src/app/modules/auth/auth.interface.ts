@@ -1,5 +1,11 @@
 import { USER_ROLE } from '../User/user.constant';
 
+
+
+export type TVerifyEmail = {
+  token: string;
+};
+
 export type TLoginUser = {
   email: string;
   password: string;

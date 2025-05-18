@@ -29,5 +29,16 @@ router.post(
 //   validateRequestCookies(AuthValidation.refreshTokenValidationSchema),
   AuthControllers.refreshToken
 );
+// Add this new route
+router.post(
+  '/verify-email',
+  AuthControllers.verifyEmail
+); 
+
+
+router.post(
+  '/resend-verification',
+  AuthControllers.resendVerificationEmail
+);
 
 export const AuthRoutes = router;

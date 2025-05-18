@@ -70,15 +70,14 @@ emailVerificationTokenExpires: {
 );
 
 userSchema.pre('save', async function (next) {
-  // eslint-disable-next-line @typescript-eslint/no-this-alias
-  const user = this; // doc
-  // hashing password and save into DB
-
-  user.password = await bcryptjs.hash(
-    user.password,
+  // only hash when password was created or changed
+  if (!this.isModified('password')) {
+    return next();
+  }
+  this.password = await bcryptjs.hash(
+    this.password,
     Number(config.bcrypt_salt_rounds)
   );
-
   next();
 });
 

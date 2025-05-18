@@ -26,7 +26,13 @@ const auth = (...requiredRoles: (keyof typeof USER_ROLE)[]) => {
 
     // checking if the user is exist
     const user = await User.isUserExistsByEmail(email);
-
+ // After user is found
+    if (!user.emailVerified) {
+      throw new AppError(
+        httpStatus.FORBIDDEN,
+        'Please verify your email before accessing this resource'
+      );
+    }
     if (!user) {
       throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !');
     }

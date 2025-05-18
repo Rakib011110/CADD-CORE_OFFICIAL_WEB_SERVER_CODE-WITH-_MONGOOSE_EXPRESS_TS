@@ -14,6 +14,16 @@ export default {
   jwt_refresh_secret: process.env.JWT_REFRESH_SECRET,
   jwt_refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN,
   admin_email: process.env.ADMIN_EMAIL,
+
+
+ email_host: process.env.EMAIL_HOST,
+  email_port: process.env.EMAIL_PORT,
+  email_user: process.env.EMAIL_USER,
+  email_pass: process.env.EMAIL_PASS,
+  email_from: process.env.EMAIL_FROM,
+  client_url: process.env.CLIENT_URL,
+
+
 //   admin_password: process.env.ADMIN_PASSWORD,
 //   admin_profile_photo: process.env.ADMIN_PROFILE_PHOTO,
 //   admin_mobile_number: process.env.ADMIN_MOBILE_NUMBER,
@@ -23,5 +33,5 @@ export default {
 //   meilisearch_host: process.env.MEILISEARCH_HOST,
 //   meilisearch_master_key: process.env.MEILISEARCH_MASTER_KEY,
 //   sender_email: process.env.SENDER_EMAIL,
-//   sender_app_password: process.env.SENDER_APP_PASS,
+//   sender_app_password: process.env.SENDER_APP_PASS, 
 };
