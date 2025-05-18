@@ -1,0 +1,52 @@
+{
+  "name": "caddcore-web-server-code",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000C\u0000A\u0000D\u0000D\u0000-\u0000C\u0000O\u0000R\u0000E\u0000-\u0000I\u0000T\u0000-\u0000S\u0000E\u0000R\u0000V\u0000E\u0000R\u0000-\u0000C\u0000O\u0000D\u0000E\u0000-\u0000U\u0000S\u0000I\u0000N\u0000G\u0000-\u0000N\u0000E\u0000X\u0000T\u0000J\u0000S\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rakib011110/CADD-CORE-IT-SERVER-CODE-USING-NEXTJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rakib011110/CADD-CORE-IT-SERVER-CODE-USING-NEXTJS/issues"
+  },
+  "homepage": "https://github.com/Rakib011110/CADD-CORE-IT-SERVER-CODE-USING-NEXTJS#readme",
+  "dependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.9",
+    "axios": "^1.8.4",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "http-status": "^2.1.0",
+    "http-status-codes": "^2.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.12.1",
+    "next": "^15.2.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/mongoose": "^5.11.96",
+    "@types/node": "^22.13.10",
+    "@types/react": "19.0.12",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.2"
+  }
+}
