@@ -9,6 +9,7 @@ export const createToken = (
     email: string;
     mobileNumber?: string;
     profilePhoto?: string;
+    emailVerified?: any;
     role: keyof typeof USER_ROLE;
     status: keyof typeof USER_STATUS;
   },

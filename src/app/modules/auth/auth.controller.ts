@@ -3,6 +3,7 @@ import config from "../../../config";
 import { catchAsync } from "../../utils/catchAsync";
 import { AuthServices } from "./auth.services";
 import sendResponse from '../../utils/sendResponse';
+import AppError from '../../error/AppError';
 
 
 
@@ -104,9 +105,28 @@ const resendVerificationEmail = catchAsync(async (req, res) => {
   });
 });
 
+
+const getMyProfile = catchAsync(async (req, res) => {
+  const userId = req.user?._id;
+console.log(req.user)
+  // if (!userId) {
+  //   throw new AppError(httpStatus.UNAUTHORIZED, "User ID not found in token");
+  // }
+
+  const result = await AuthServices.getMyProfile(userId);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "User retrieved successfully",
+    data: result,
+  });
+});
+
   export const AuthControllers = {
     registerUser,
     loginUser,
     changePassword,
-    refreshToken,verifyEmail, resendVerificationEmail
+    refreshToken,verifyEmail, resendVerificationEmail,
+    getMyProfile
   };

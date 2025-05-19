@@ -10,68 +10,74 @@ import { User } from '../User/user.model';
 
 import crypto from 'crypto';
 import { sendVerificationEmail } from '../../utils/emailSender';
+import { TUser } from '../User/user.interface';
 
 // Add this to your existing imports
 
 // Update your registerUser function to include email verification
-const registerUser = async (payload: TRegisterUser) => {
-  const user = await User.isUserExistsByEmail(payload?.email);
+export const registerUser = async (payload: TRegisterUser) => {
+  const existingUser = await User.isUserExistsByEmail(payload.email);
 
-  if (user) {
-    throw new AppError(httpStatus.NOT_FOUND, 'This user is already exist!');
+// 1. If user exists and already verified
+if (existingUser) {
+  if (existingUser.emailVerified === true) {
+    throw new AppError(httpStatus.CONFLICT, 'This user already exists and is verified.');
   }
 
-  payload.role = USER_ROLE.USER;
+  if (existingUser.emailVerified === false) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'This user already exists but is not verified. Please check your email.');
+  }
+}
 
-  // Generate verification token
-  const verificationToken = crypto.randomBytes(32).toString('hex');
-  const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+// 2. Proceed to register new user
+payload.role = USER_ROLE.USER;
 
-  // Create user with verification info
-  const newUser = await User.create({
-    ...payload,
-    emailVerificationToken: verificationToken,
-    emailVerificationTokenExpires: verificationTokenExpires,
-  });
+const verificationToken = crypto.randomBytes(32).toString('hex');
+const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
-  // Send verification email
-  await sendVerificationEmail(newUser.email, verificationToken);
+const newUser = await User.create({
+  ...payload,
+  emailVerificationToken: verificationToken,
+  emailVerificationTokenExpires: verificationTokenExpires,
+});
 
-  const jwtPayload = {
+await sendVerificationEmail(newUser.email, verificationToken);
+
+const jwtPayload = {
+  _id: newUser._id,
+  name: newUser.name,
+  email: newUser.email,
+  mobileNumber: newUser.mobileNumber,
+  role: newUser.role,
+  status: newUser.status,
+  emailVerified: newUser.emailVerified,
+};
+
+const accessToken = createToken(
+  jwtPayload,
+  config.jwt_access_secret as string,
+  config.jwt_access_expires_in as string
+);
+
+const refreshToken = createToken(
+  jwtPayload,
+  config.jwt_refresh_secret as string,
+  config.jwt_refresh_expires_in as string
+);
+
+return {
+  accessToken,
+  refreshToken,
+  user: {
     _id: newUser._id,
     name: newUser.name,
     email: newUser.email,
-    mobileNumber: newUser.mobileNumber,
     role: newUser.role,
-    status: newUser.status,
     emailVerified: newUser.emailVerified,
-  };
-
-  const accessToken = createToken(
-    jwtPayload,
-    config.jwt_access_secret as string,
-    config.jwt_access_expires_in as string
-  );
-
-  const refreshToken = createToken(
-    jwtPayload,
-    config.jwt_refresh_secret as string,
-    config.jwt_refresh_expires_in as string
-  );
-
-  return {
-    accessToken,
-    refreshToken,
-    user: {
-      _id: newUser._id,
-      name: newUser.name,
-      email: newUser.email,
-      role: newUser.role,
-      emailVerified: newUser.emailVerified,
-    },
-  };
+  },
 };
 
+};
 // Add this new function for email verification
 const verifyEmail = async (token: string) => {
   // Find user with this token and check expiration
@@ -82,6 +88,14 @@ const verifyEmail = async (token: string) => {
 
   if (!user) {
     throw new AppError(httpStatus.BAD_REQUEST, 'Invalid or expired token');
+  }
+// Check if already verified
+  if (user.emailVerified) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'Email is already verified.');
+  }
+  // Check if token is expired
+  if (user.emailVerificationTokenExpires && user.emailVerificationTokenExpires < new Date()) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'Verification token has expired.');
   }
 
   // Update user to mark email as verified
@@ -136,6 +150,7 @@ const loginUser = async (payload: TLoginUser) => {
     email: user.email,
     mobileNumber: user.mobileNumber,
     role: user.role,
+     emailVerified: user.emailVerified, 
     status: user.status,
   };
 
@@ -284,7 +299,10 @@ const resendVerificationEmail = async (email: string) => {
   };
 };
 
-
+const getMyProfile = async (userId: string): Promise<TUser | null> => {
+  const user = await User.findById(userId);
+  return user;
+};
 
 
 
@@ -297,5 +315,6 @@ export const AuthServices = {
   changePassword,
   refreshToken,
   verifyEmail, 
-  resendVerificationEmail
+  resendVerificationEmail, 
+  getMyProfile
 };

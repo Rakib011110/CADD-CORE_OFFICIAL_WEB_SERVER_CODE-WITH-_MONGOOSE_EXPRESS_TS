@@ -41,4 +41,16 @@ router.post(
   AuthControllers.resendVerificationEmail
 );
 
+
+
+
+router.get(
+  '/me',
+  auth(USER_ROLE.USER, USER_ROLE.ADMIN), // ⬅️ Protect this route
+  AuthControllers.getMyProfile // ⬅️ You will create this controller
+);
+
+
+
+
 export const AuthRoutes = router;

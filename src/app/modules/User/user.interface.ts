@@ -11,12 +11,13 @@ export type TUser = {
   password: string;
   status: keyof typeof USER_STATUS;
   passwordChangedAt?: Date;
+
   mobileNumber?: string;
   profilePhoto?: string;
 
 
 // verify 
-emailVerified?: boolean;
+emailVerified?: any;
 emailVerificationToken?: string;
 emailVerificationTokenExpires?: Date;
 
