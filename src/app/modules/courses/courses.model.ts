@@ -1,4 +1,5 @@
 import { model, Schema } from "mongoose";
+import { number } from "zod";
 
 export const courseSchema = new Schema(
   {
@@ -12,7 +13,7 @@ export const courseSchema = new Schema(
     photoUrl: { type: String, required: true },
     projects: { type: String, required: true },
     description: { type: String, required: true },
-    courseFee: { type: String },
+    courseFee: { type: Number },
     scholar: { type: String, },
     courseDiscount: { type: String, },
     schedule: {

@@ -10,7 +10,7 @@ export type TCourse = {
   photoUrl?: string;
   projects?: string;
   description?: string;
-  courseFee?: string; 
+   courseFee: number;
   
   courseDiscount?: string;
   scholar:string;

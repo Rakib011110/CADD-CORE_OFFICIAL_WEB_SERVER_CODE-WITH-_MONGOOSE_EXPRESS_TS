@@ -37,6 +37,9 @@
     "nodemailer": "^7.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "sslcommerz": "^1.7.0",
+    "sslcommerz-lts": "^1.1.0",
+    "uuid": "^11.1.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {

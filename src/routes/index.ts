@@ -15,6 +15,7 @@ import { IndustrialBannerRoutes } from "../app/modules/industrial/industrialBann
 import { JobsRoutes } from "../app/modules/jobs/job.routes";
 import { ApplicationRoutes } from "../app/modules/jobs/Jobaplications/jobaplication.routes";
 import { InstructorHereRoutes } from "../app/modules/instructorHire/instructoreHire.routes";
+import { PaymentRoutes } from "../app/modules/payments/payment.route";
 
 const routes = Router(); 
 
@@ -90,8 +91,12 @@ const moduleRoutes = [
     {
       path:"/instructorHire", 
       route: InstructorHereRoutes
+    }, 
+    {
+      path:"/payments", 
+      route: PaymentRoutes
     }
-    
+
   ]; 
 
 

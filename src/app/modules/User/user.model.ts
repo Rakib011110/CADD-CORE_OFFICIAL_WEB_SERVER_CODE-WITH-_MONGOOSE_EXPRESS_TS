@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 import bcryptjs from 'bcryptjs';
-import { Schema, model } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 import { USER_ROLE, USER_STATUS } from './user.constant';
 import { IUserModel, TUser } from './user.interface';
 import config from '../../../config';
@@ -60,12 +60,51 @@ emailVerificationTokenExpires: {
   type: Date,
   select: false,
 },
-
-
+ // Course purchase and payment
+    purchasedCourses: [{
+     course: { type: mongoose.Types.ObjectId, ref: 'Course' },
+      totalPaid: { type: Number, default: 0 },
+      dueAmount: { type: Number, required: true },
+      isFullyPaid: { type: Boolean, default: false },
+      nextDueDate: { type: Date },
+      totalPrice: { type: Number, required: true },
+      penaltyAmount: { type: Number, default: 0 },
+      installments: [{
+        amount: { type: Number, required: true },
+        date: { type: Date, default: Date.now },
+        method: { 
+          type: String, 
+          enum: ['sslcommerz', 'manual', 'bank'],
+          required: true
+        },
+        transactionId: { type: String },
+        status: { 
+          type: String, 
+          enum: ['pending', 'completed', 'failed'],
+          default: 'completed'
+        }
+      }]
+    }],
+    
+    // Address
+    address: {
+      street: { type: String },
+      city: { type: String },
+      state: { type: String },
+      postalCode: { type: String },
+      country: { type: String }
+    }
   },
+
   {
     timestamps: true,
-    virtuals: true,
+    toJSON: {
+      virtuals: true,
+      transform: function(doc, ret) {
+        delete ret.password;
+        return ret;
+      }
+    }
   }
 );
 

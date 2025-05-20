@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Model } from 'mongoose';
+import { Model, ObjectId, Schema } from 'mongoose';
 import { USER_ROLE, USER_STATUS } from './user.constant';
 
 export type TUser = {
@@ -21,6 +21,33 @@ emailVerified?: any;
 emailVerificationToken?: string;
 emailVerificationTokenExpires?: Date;
 
+  // Payment and Course fields
+  purchasedCourses?: {
+    course: ObjectId
+    totalPaid: number;
+    dueAmount: number;
+    isFullyPaid: boolean;
+    nextDueDate?: Date;
+    totalPrice: number;
+    penaltyAmount?: number;
+    installments?: {
+      amount: number;
+      date: Date;
+      method: 'sslcommerz' | 'manual' | 'bank';
+      transactionId?: string;
+      status?: 'pending' | 'completed' | 'failed';
+    }[];
+  }[];
+  
+  // Address (optional for invoicing)
+  address?: {
+    street?: string;
+    city?: string;
+    state?: string;
+    postalCode?: string;
+    country?: string;
+  };
+  
 
   createdAt?: Date;
   updatedAt?: Date;
