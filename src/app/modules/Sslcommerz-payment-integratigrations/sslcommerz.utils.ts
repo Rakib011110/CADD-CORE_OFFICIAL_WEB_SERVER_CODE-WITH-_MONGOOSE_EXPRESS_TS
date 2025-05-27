@@ -35,8 +35,12 @@ export const initiateSSLCommerzPayment = async ({
     cus_name: customer.name,
     cus_email: customer.email,
     cus_add1: customer.address,
+        ipn_url: `${process.env.SSL_PAYMENT_IPN_URL}/${transactionId}`, // IPN URL সংশোধন
+
+
     cus_phone: customer.phone,
     shipping_method: 'NO',
+    cus_timezone: '+6', 
     product_name: 'Course Purchase',
     product_category: 'Education',
     product_profile: 'general',

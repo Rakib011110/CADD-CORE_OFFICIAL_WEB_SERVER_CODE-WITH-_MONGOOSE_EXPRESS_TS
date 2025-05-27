@@ -14,7 +14,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     },
   });
 
-  const verificationUrl = `${config.client_url}/verify-email?token=${token}`;
+  const verificationUrl = `${process.env.CLIENT_URL}/verify-email?token=${token}`;
 
   await transporter.sendMail({
     from: config.email_from,

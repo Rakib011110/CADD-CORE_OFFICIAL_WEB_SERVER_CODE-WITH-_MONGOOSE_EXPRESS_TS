@@ -13,20 +13,26 @@ const getAllCoursesFromDb = async () => {
 //   const course = await Course.findById( id ); 
 //   if (!course) {
 //     throw new Error("Course not found");
-//   }
+//   }  here am tring to get courses Shedules by in single course suppose here i want to get schedules which is comming from courseSchedules model interfaces , and i have created schedule model and interfaces but here is not showing schedules in single course
 //   return course;
 // }; 
 
   export const getSingleCourseIDFromDb = async (id: string) => {
   console.log(id)
-    
-        return await Course.findById(id);
-      };
-      
+    return await Course.findById(id).populate({
+      path: 'courseSchedules',
+      options: { sort: { onlineStartDate: 1 } }
+    });
+  };
+
+  
 
 
 const getACourseFromDb = async (slug: string) => {
-  const course = await Course.findOne({ slug }); 
+  const course = await Course.findOne({ slug }).populate({
+    path: 'courseSchedules',
+    options: { sort: { onlineStartDate: 1 } }
+  });
   if (!course) {
     throw new Error("Course not found");
   }

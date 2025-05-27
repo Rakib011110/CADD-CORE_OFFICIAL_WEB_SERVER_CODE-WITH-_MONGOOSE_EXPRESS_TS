@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import routes from "./routes";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import notFound from "./app/middlewares/notFound";
+import bodyParser from "body-parser";
 // 
 
 dotenv.config();
@@ -12,6 +13,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use("/api", routes);
 

@@ -16,6 +16,9 @@ import { JobsRoutes } from "../app/modules/jobs/job.routes";
 import { ApplicationRoutes } from "../app/modules/jobs/Jobaplications/jobaplication.routes";
 import { InstructorHereRoutes } from "../app/modules/instructorHire/instructoreHire.routes";
 import { PaymentRoutes } from "../app/modules/payments/payment.route";
+import { couponRoutes } from "../app/modules/payments/coupon/coupon.routes";
+import { CourseScheduleRoutes } from "../app/modules/courses/CourseSchedule/CourseSchedule.routes";
+
 
 const routes = Router(); 
 
@@ -24,9 +27,14 @@ const moduleRoutes = [
       path: "/users",
       route: UserRoutes,
     },
+    
     {
       path: "/courses",
       route: CourseRoutes,
+    },
+    {
+      path: "/schedules",
+      route: CourseScheduleRoutes,
     },
     {
       path: "/industrial-courses",
@@ -95,6 +103,10 @@ const moduleRoutes = [
     {
       path:"/payments", 
       route: PaymentRoutes
+    }, 
+    {
+      path:"/coupons", 
+      route: couponRoutes
     }
 
   ]; 

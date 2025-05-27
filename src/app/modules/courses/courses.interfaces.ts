@@ -1,3 +1,6 @@
+import { ObjectId } from "mongoose";
+import { ICourseSchedule } from "./CourseSchedule/CourseSchedule.interfaces";
+
 export type TCourse = {
   _id?: string;
   title?: string;
@@ -12,6 +15,8 @@ export type TCourse = {
   description?: string;
    courseFee: number;
   
+  courseSchedules?:   ObjectId[] | ICourseSchedule[];
+
   courseDiscount?: string;
   scholar:string;
   schedule?: {

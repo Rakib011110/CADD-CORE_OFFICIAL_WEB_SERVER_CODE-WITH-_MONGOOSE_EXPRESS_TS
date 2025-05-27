@@ -1,5 +1,4 @@
 import { model, Schema } from "mongoose";
-import { number } from "zod";
 
 export const courseSchema = new Schema(
   {
@@ -16,6 +15,16 @@ export const courseSchema = new Schema(
     courseFee: { type: Number },
     scholar: { type: String, },
     courseDiscount: { type: String, },
+
+courseSchedules: [
+  {
+    type: Schema.Types.ObjectId,
+    ref: "CourseSchedule", // ✅ Make sure this matches exactly
+  },
+],
+
+
+
     schedule: {
       startingDate: { type: String },
       mode: { type: String },
@@ -108,5 +117,9 @@ export const courseSchema = new Schema(
     timestamps: true,
   }
 );
+
+
+
+
 
 export const Course = model("Course", courseSchema);
