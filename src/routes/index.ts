@@ -33,7 +33,7 @@ const moduleRoutes = [
       route: CourseRoutes,
     },
     {
-      path: "/schedules",
+      path: "/course-schedule",
       route: CourseScheduleRoutes,
     },
     {

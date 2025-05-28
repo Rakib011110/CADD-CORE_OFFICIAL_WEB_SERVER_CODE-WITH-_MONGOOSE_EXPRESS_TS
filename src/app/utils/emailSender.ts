@@ -6,7 +6,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     host: config.email_host,
     
     port: Number(config.email_port),
-     secure: false, 
+     secure: false, // 👈 must be false for port 587
 
     auth: {
       user: config.email_user,
