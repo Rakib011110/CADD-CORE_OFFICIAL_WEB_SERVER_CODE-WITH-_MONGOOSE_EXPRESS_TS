@@ -6,7 +6,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     host: config.email_host,
     
     port: Number(config.email_port),
-     secure: false, // 👈 must be false for port 587
+     secure: false, 
 
     auth: {
       user: config.email_user,
@@ -14,7 +14,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     },
   });
 
-  const verificationUrl = `${process.env.CLIENT_URL}/verify-email?token=${token}`;
+  const verificationUrl = `${config.client_url}/verify-email?token=${token}`;
 
   await transporter.sendMail({
     from: config.email_from,
