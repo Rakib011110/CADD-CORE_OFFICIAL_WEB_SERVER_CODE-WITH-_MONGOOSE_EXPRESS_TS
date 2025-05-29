@@ -18,6 +18,7 @@ import { InstructorHereRoutes } from "../app/modules/instructorHire/instructoreH
 import { PaymentRoutes } from "../app/modules/payments/payment.route";
 import { couponRoutes } from "../app/modules/payments/coupon/coupon.routes";
 import { CourseScheduleRoutes } from "../app/modules/courses/CourseSchedule/CourseSchedule.routes";
+import { installmentPlanRoutes } from "../app/modules/payments/installmentPlan/installmentPlan.routes";
 
 
 const routes = Router(); 
@@ -107,6 +108,10 @@ const moduleRoutes = [
     {
       path:"/coupons", 
       route: couponRoutes
+    },
+    {
+      path:"/installment-plans", 
+      route: installmentPlanRoutes
     }
 
   ]; 
